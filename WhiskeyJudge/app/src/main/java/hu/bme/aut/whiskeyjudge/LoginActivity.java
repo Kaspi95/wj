@@ -7,6 +7,15 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {                                                       //delay
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        setTheme(R.style.AppTheme);                                 //set back to main theme
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
