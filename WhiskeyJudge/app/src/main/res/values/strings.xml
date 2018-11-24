@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WhiskeyJudge</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="please_enter_your_details">Please enter your details</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
