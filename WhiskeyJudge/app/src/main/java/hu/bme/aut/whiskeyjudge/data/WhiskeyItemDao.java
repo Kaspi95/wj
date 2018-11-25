@@ -7,6 +7,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
+
 @Dao
 public interface WhiskeyItemDao {
     @Query("SELECT * FROM whiskeyitem")
