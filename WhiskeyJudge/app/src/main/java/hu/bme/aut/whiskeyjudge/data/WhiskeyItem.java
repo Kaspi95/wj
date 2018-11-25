@@ -5,7 +5,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverter;
 
-@Entity(tableName = "shoppingitem")
+@Entity(tableName = "whiskeyitem")
 public class WhiskeyItem {
     public enum Category {
         SCOTTISH, IRISH, BOURBON, CANADIAN;
