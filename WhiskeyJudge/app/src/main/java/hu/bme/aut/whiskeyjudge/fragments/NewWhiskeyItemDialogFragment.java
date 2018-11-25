@@ -25,7 +25,6 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
     private EditText estimatedPriceEditText;
     private Spinner categorySpinner;
 
-
     public interface NewWhiskeyItemDialogListener {
         void onWhiskeyItemCreated(WhiskeyItem newItem);
     }

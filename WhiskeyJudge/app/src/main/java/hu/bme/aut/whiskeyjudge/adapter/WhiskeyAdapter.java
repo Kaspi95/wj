@@ -21,7 +21,6 @@ import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 public class WhiskeyAdapter
         extends RecyclerView.Adapter<WhiskeyAdapter.WhiskeyViewHolder> {
 
-
     private final List<WhiskeyItem> items;
 
     private WhiskeyItemClickListener listener;
@@ -58,7 +57,8 @@ public class WhiskeyAdapter
     }
 
     public interface WhiskeyItemClickListener {
-        void onItemChanged(WhiskeyItem item);
+        void onItemChanged(WhiskeyItem item);           //TODO: valtoztatas ranoymasra
+        void onItemDeleted(WhiskeyItem item);
     }
 
     private @DrawableRes
@@ -88,6 +88,12 @@ public class WhiskeyAdapter
         notifyItemInserted(items.size() - 1);
     }
 
+
+    public void deleteItem(WhiskeyItem item) {
+        items.remove(item);
+        notifyItemRemoved(items.indexOf(item));
+    }
+
     public void update(List<WhiskeyItem> whiskeyItems) {
         items.clear();
         items.addAll(whiskeyItems);
@@ -114,6 +120,13 @@ public class WhiskeyAdapter
             categoryTextView = itemView.findViewById(R.id.WhiskeyItemCategoryTextView);
             priceTextView = itemView.findViewById(R.id.WhiskeyItemPriceTextView);
             removeButton = itemView.findViewById(R.id.WhiskeyItemRemoveButton);
+
+            removeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemDeleted(item);
+                }
+            });
         }
     }
 }

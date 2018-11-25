@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import java.util.List;
 
@@ -19,7 +20,8 @@ import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyJudgeDatabase;
 import hu.bme.aut.whiskeyjudge.fragments.NewWhiskeyItemDialogFragment;
 
-public class MainActivity extends AppCompatActivity implements NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener, WhiskeyAdapter.WhiskeyItemClickListener {
+public class MainActivity extends AppCompatActivity
+                          implements NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener, WhiskeyAdapter.WhiskeyItemClickListener {
 
     private RecyclerView recyclerView;
     private WhiskeyAdapter adapter;
@@ -43,8 +45,9 @@ public class MainActivity extends AppCompatActivity implements NewWhiskeyItemDia
         database = Room.databaseBuilder(
                 getApplicationContext(),
                 WhiskeyJudgeDatabase.class,
-                "shopping-list"
+                "whiskey-list"
         ).build();
+
         initRecyclerView();
     }
 
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NewWhiskeyItemDia
 
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
-                Log.d("MainActivity", "ShoppingItem update was successful");
+                Log.d("MainActivity", "WhiskeyItem update was successful");
             }
         }.execute();
     }
@@ -101,6 +104,25 @@ public class MainActivity extends AppCompatActivity implements NewWhiskeyItemDia
             @Override
             protected void onPostExecute(WhiskeyItem whiskeyItem) {
                 adapter.addItem(whiskeyItem);
+                Log.d("MainActivity", "WhiskeyItem creation was successful");
+            }
+        }.execute();
+    }
+
+    @Override
+    public void onItemDeleted(final WhiskeyItem item) {
+        new AsyncTask<Void, Void, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                database.whiskeyItemDao().deleteItem(item);
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean isSuccessful) {
+                adapter.deleteItem(item);
+                Log.d("MainActivity", "WhiskeyItem delete was successful");
             }
         }.execute();
     }
