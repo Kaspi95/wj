@@ -1,7 +1,6 @@
 package hu.bme.aut.whiskeyjudge.activities;
 
 import android.arch.persistence.room.Room;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,7 +21,7 @@ import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyJudgeDatabase;
 import hu.bme.aut.whiskeyjudge.fragments.NewWhiskeyItemDialogFragment;
 
-public class ListActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity
                           implements NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener, WhiskeyAdapter.WhiskeyItemClickListener {
 
     private RecyclerView recyclerView;
@@ -77,19 +76,18 @@ public class ListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemSelected(final WhiskeyItem item) {
+    public void onItemChanged(final WhiskeyItem item) {
         new AsyncTask<Void, Void, Boolean>() {
 
             @Override
             protected Boolean doInBackground(Void... voids) {
-                Intent intent = new Intent(ListActivity.this, DetailsActivity.class);   //Any item navigate to the DetailsActivity
-                startActivity(intent);
+                database.whiskeyItemDao().update(item);
                 return true;
             }
 
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
-                Log.d("ListActivity", item.name+" was selected.");
+                Log.d("MainActivity", "WhiskeyItem update was successful");
             }
         }.execute();
     }
@@ -107,7 +105,7 @@ public class ListActivity extends AppCompatActivity
             @Override
             protected void onPostExecute(WhiskeyItem whiskeyItem) {
                 adapter.addItem(whiskeyItem);
-                Log.d("ListActivity", "WhiskeyItem creation was successful with name: "+ newItem.name);
+                Log.d("MainActivity", "WhiskeyItem creation was successful");
             }
         }.execute();
     }
@@ -125,10 +123,10 @@ public class ListActivity extends AppCompatActivity
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
                 adapter.deleteItem(item);
-                Log.d("ListActivity", item.name+" was deleted successfully");
+                Log.d("MainActivity", "WhiskeyItem delete was successful");
             }
         }.execute();
-    }       //TODO: wrong element deleted!!!!!!!!!!!!!!!!!!!!!!
+    }
 
 
 }

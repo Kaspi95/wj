@@ -57,8 +57,8 @@ public class WhiskeyAdapter
     }
 
     public interface WhiskeyItemClickListener {
+        void onItemChanged(WhiskeyItem item);           //TODO: valtoztatas ranoymasra
         void onItemDeleted(WhiskeyItem item);
-        void onItemSelected(WhiskeyItem item);
     }
 
     private @DrawableRes
@@ -88,6 +88,7 @@ public class WhiskeyAdapter
         notifyItemInserted(items.size() - 1);
     }
 
+
     public void deleteItem(WhiskeyItem item) {
         items.remove(item);
         notifyItemRemoved(items.indexOf(item));
@@ -98,6 +99,7 @@ public class WhiskeyAdapter
         items.addAll(whiskeyItems);
         notifyDataSetChanged();
     }
+
 
     class WhiskeyViewHolder extends RecyclerView.ViewHolder {
 
@@ -118,15 +120,6 @@ public class WhiskeyAdapter
             categoryTextView = itemView.findViewById(R.id.WhiskeyItemCategoryTextView);
             priceTextView = itemView.findViewById(R.id.WhiskeyItemPriceTextView);
             removeButton = itemView.findViewById(R.id.WhiskeyItemRemoveButton);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (listener != null) {
-                        listener.onItemSelected(item);
-                    }
-                }
-            });
 
             removeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
