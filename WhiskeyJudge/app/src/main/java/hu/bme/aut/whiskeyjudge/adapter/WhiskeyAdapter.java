@@ -71,7 +71,7 @@ public class WhiskeyAdapter
             case IRISH:
                 ret = R.drawable.irish;
                 break;
-            case  BOURBON:
+            case BOURBON:
                 ret = R.drawable.bourbon;
                 break;
             case CANADIAN:
@@ -93,7 +93,6 @@ public class WhiskeyAdapter
         items.addAll(whiskeyItems);
         notifyDataSetChanged();
     }
-
 
 
     class WhiskeyViewHolder extends RecyclerView.ViewHolder {

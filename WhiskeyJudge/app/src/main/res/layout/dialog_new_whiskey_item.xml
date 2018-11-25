@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,29 +8,29 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"/>
+        android:text="@string/name" />
 
     <EditText
         android:id="@+id/WhiskeyItemNameEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dip"
-        android:text="@string/description"/>
+        android:text="@string/description" />
 
     <EditText
         android:id="@+id/WhiskeyItemDescriptionEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dip"
-        android:text="@string/category"/>
+        android:text="@string/category" />
 
     <Spinner
         android:id="@+id/WhiskeyItemCategorySpinner"
@@ -42,18 +41,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dip"
-        android:text="@string/estimated_price"/>
+        android:text="@string/estimated_price" />
 
     <EditText
         android:id="@+id/WhiskeyItemEstimatedPriceEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal" />
 
     <CheckBox
         android:id="@+id/WhiskeyItemIsPurchasedCheckBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/already_purchased"/>
+        android:text="@string/already_purchased" />
 
 </LinearLayout>

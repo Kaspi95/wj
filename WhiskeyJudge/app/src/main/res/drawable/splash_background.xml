@@ -4,7 +4,7 @@
     <item>
         <bitmap
             android:gravity="fill_horizontal|clip_vertical"
-            android:src="@drawable/splash_image"/>
+            android:src="@drawable/splash_image" />
     </item>
 
 </layer-list>
