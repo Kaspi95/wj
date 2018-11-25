@@ -1,4 +1,4 @@
-package hu.bme.aut.whiskeyjudge;
+package hu.bme.aut.whiskeyjudge.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import hu.bme.aut.whiskeyjudge.R;
 
 public class LoginActivity extends AppCompatActivity {
 

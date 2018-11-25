@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context="hu.bme.aut.whiskeyjudge.LoginActivity">
+    tools:context="hu.bme.aut.whiskeyjudge.activities.LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:text="@string/please_enter_your_details" />
+        android:text="@string/please_enter_your_details"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/email" />
+        android:text="@string/email"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <EditText
         android:id="@+id/etEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/password" />
+        android:text="@string/password"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <Button
         android:id="@+id/btnLogin"

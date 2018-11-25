@@ -1,4 +1,4 @@
-package hu.bme.aut.whiskeyjudge;
+package hu.bme.aut.whiskeyjudge.activities;
 
 import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 
 import java.util.List;
 
+import hu.bme.aut.whiskeyjudge.R;
 import hu.bme.aut.whiskeyjudge.adapter.WhiskeyAdapter;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyJudgeDatabase;
