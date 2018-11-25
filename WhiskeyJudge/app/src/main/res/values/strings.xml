@@ -2,21 +2,21 @@
 
     <string name="app_name">WhiskeyJudge</string>
 
-<!-- Login Page-->
+    <!-- Login Page-->
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="please_enter_your_details">Please enter your details</string>
 
-<!-- Main Page-->
+    <!-- Main Page-->
     <string name="title_activity_main">List of Whiskeys</string>
 
-<!-- Main Page's new item fragment-->
+    <!-- Main Page's new item fragment-->
     <string name="new_whiskey_item">New whiskey item</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
 
-<!-- Database-->
+    <!-- Database-->
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="category">Category</string>
@@ -27,6 +27,7 @@
         <item>Bourbon</item>
         <item>Canadian</item>
     </string-array>
+    <string name="title_activity_details">DetailsActivity</string>
 
 
 </resources>
