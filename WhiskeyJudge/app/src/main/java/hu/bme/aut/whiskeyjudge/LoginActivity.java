@@ -11,22 +11,22 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try {                                                       //delay
+        try {                                                                                       //delay, TODO: remove this when u ready
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        //Theme(R.style.AppTheme);                                 //set back to main theme, but need only after the login page
+        //Theme(R.style.AppTheme);                                                                  //set back to main theme, but need only after the login page
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText etEmailAddress = findViewById(R.id.etEmailAddress);          //references for login page
+        final EditText etEmailAddress = findViewById(R.id.etEmailAddress);                          //references for login page
         final EditText etPassword = findViewById(R.id.etPassword);
         final Button btnLogin = findViewById(R.id.btnLogin);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {                    //login button
+        btnLogin.setOnClickListener(new View.OnClickListener() {                                    //login button
             @Override
             public void onClick(final View view) {
                 if (etEmailAddress.getText().toString().isEmpty()) {
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);   //Login button navigate to the mainActivity
                 startActivity(intent);
             }
 
