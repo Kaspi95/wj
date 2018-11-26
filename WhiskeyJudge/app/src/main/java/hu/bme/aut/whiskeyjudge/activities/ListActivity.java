@@ -4,14 +4,12 @@ import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 
 import java.util.List;
 
@@ -21,7 +19,7 @@ import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyJudgeDatabase;
 import hu.bme.aut.whiskeyjudge.fragments.NewWhiskeyItemDialogFragment;
 
-public class MainActivity extends AppCompatActivity
+public class ListActivity extends AppCompatActivity
                           implements NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener, WhiskeyAdapter.WhiskeyItemClickListener {
 
     private RecyclerView recyclerView;
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
-                Log.d("MainActivity", "WhiskeyItem update was successful");
+                Log.d("ListActivity", "WhiskeyItem update was successful");
             }
         }.execute();
     }
@@ -105,7 +103,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             protected void onPostExecute(WhiskeyItem whiskeyItem) {
                 adapter.addItem(whiskeyItem);
-                Log.d("MainActivity", "WhiskeyItem creation was successful");
+                Log.d("ListActivity", "WhiskeyItem creation was successful");
             }
         }.execute();
     }
@@ -123,7 +121,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
                 adapter.deleteItem(item);
-                Log.d("MainActivity", "WhiskeyItem delete was successful");
+                Log.d("ListActivity", "WhiskeyItem delete was successful");
             }
         }.execute();
     }

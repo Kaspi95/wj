@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);   //Login button navigate to the mainActivity
+                Intent intent = new Intent(LoginActivity.this, ListActivity.class);   //Login button navigate to the mainActivity
                 startActivity(intent);
             }
 
