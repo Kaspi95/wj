@@ -57,7 +57,7 @@ public class WhiskeyAdapter
     }
 
     public interface WhiskeyItemClickListener {
-        void onItemChanged(WhiskeyItem item);           //TODO: valtoztatas ranoymasra
+        void onItemChanged(WhiskeyItem item);
         void onItemDeleted(WhiskeyItem item);
     }
 
@@ -109,6 +109,7 @@ public class WhiskeyAdapter
         TextView categoryTextView;
         TextView priceTextView;
         ImageButton removeButton;
+        ImageButton editButton;
 
         WhiskeyItem item;
 
@@ -120,6 +121,7 @@ public class WhiskeyAdapter
             categoryTextView = itemView.findViewById(R.id.WhiskeyItemCategoryTextView);
             priceTextView = itemView.findViewById(R.id.WhiskeyItemPriceTextView);
             removeButton = itemView.findViewById(R.id.WhiskeyItemRemoveButton);
+            editButton = itemView.findViewById(R.id.WhiskeyItemModifyButton);
 
             removeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,6 +129,14 @@ public class WhiskeyAdapter
                     listener.onItemDeleted(item);
                 }
             });
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemChanged(item);
+                }
+            });
+
+
         }
     }
 }

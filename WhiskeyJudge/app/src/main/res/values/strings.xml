@@ -27,6 +27,12 @@
         <item>Bourbon</item>
         <item>Canadian</item>
     </string-array>
-
-
+    <string-array name="type_items">
+        <item>Malt</item>
+        <item>Grain</item>
+        <item>Blended</item>
+        <item>Bourbon</item>
+        <item>Tennessee</item>
+        <item>Pot</item>
+    </string-array>
 </resources>

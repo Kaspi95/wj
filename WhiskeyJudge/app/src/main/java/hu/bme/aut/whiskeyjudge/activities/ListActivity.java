@@ -10,17 +10,17 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-
 import java.util.List;
 
 import hu.bme.aut.whiskeyjudge.R;
 import hu.bme.aut.whiskeyjudge.adapter.WhiskeyAdapter;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyJudgeDatabase;
+import hu.bme.aut.whiskeyjudge.fragments.ModifyWhiskeyItemDialogFragment;
 import hu.bme.aut.whiskeyjudge.fragments.NewWhiskeyItemDialogFragment;
 
 public class ListActivity extends AppCompatActivity
-                          implements NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener, WhiskeyAdapter.WhiskeyItemClickListener {
+                          implements NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener, WhiskeyAdapter.WhiskeyItemClickListener, ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener {
 
     private RecyclerView recyclerView;
     private WhiskeyAdapter adapter;
@@ -45,7 +45,8 @@ public class ListActivity extends AppCompatActivity
                 getApplicationContext(),
                 WhiskeyJudgeDatabase.class,
                 "whiskey-list"
-        ).build();
+        )       .fallbackToDestructiveMigration()
+                .build();
 
         initRecyclerView();
     }
@@ -85,6 +86,7 @@ public class ListActivity extends AppCompatActivity
 
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
+                adapter.update(database.whiskeyItemDao().getAll());
                 Log.d("ListActivity", "WhiskeyItem update was successful");
             }
         }.execute();

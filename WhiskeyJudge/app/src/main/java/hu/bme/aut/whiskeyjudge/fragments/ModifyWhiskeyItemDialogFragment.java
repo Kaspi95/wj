@@ -17,28 +17,32 @@ import android.widget.Spinner;
 import hu.bme.aut.whiskeyjudge.R;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 
-public class NewWhiskeyItemDialogFragment extends DialogFragment {
-    public static final String TAG = "NewWhiskeyItemDialogFragment";
+public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
+
+    public static final String TAG = "ModifyWhiskeyItemDialogFragment";
 
     private EditText nameEditText;
     private EditText descriptionEditText;
     private EditText estimatedPriceEditText;
     private Spinner categorySpinner;
+    private Spinner typeSpinner;
+    private EditText alcoholPercentageEditText;
+    private EditText reviewEditText;
 
-    public interface NewWhiskeyItemDialogListener {
-        void onWhiskeyItemCreated(WhiskeyItem newItem);
+    public interface ModifyWhiskeyItemDialogListener {
+        void onItemChanged(WhiskeyItem newItem);
     }
 
-    private NewWhiskeyItemDialogListener listener;
+    private ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener listener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FragmentActivity activity = getActivity();
-        if (activity instanceof NewWhiskeyItemDialogListener) {
-            listener = (NewWhiskeyItemDialogListener) activity;
+        if (activity instanceof ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener) {
+            listener = (ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener) activity;
         } else {
-            throw new RuntimeException("Activity must implement the NewWhiskeyItemDialogListener interface!");
+            throw new RuntimeException("Activity must implement the ModifyWhiskeyItemDialogListener interface!");
         }
     }
 
@@ -52,7 +56,7 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (isValid()) {
-                            listener.onWhiskeyItemCreated(getWhiskeyItem());
+                            listener.onItemChanged(getWhiskeyItem());
                         }
                     }
                 })
@@ -68,21 +72,24 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
         WhiskeyItem whiskeyItem = new WhiskeyItem();
         whiskeyItem.name = nameEditText.getText().toString();
         whiskeyItem.description = descriptionEditText.getText().toString();
+        whiskeyItem.review = reviewEditText.getText().toString();
         try {
             whiskeyItem.estimatedPrice = Integer.parseInt(estimatedPriceEditText.getText().toString());
         } catch (NumberFormatException e) {
             whiskeyItem.estimatedPrice = 0;
         }
+        try {
+            whiskeyItem.alcoholPercentage = Integer.parseInt(alcoholPercentageEditText.getText().toString());
+        } catch (NumberFormatException e) {
+            whiskeyItem.alcoholPercentage = 0;
+        }
         whiskeyItem.category = WhiskeyItem.Category.getByOrdinal(categorySpinner.getSelectedItemPosition());
-        whiskeyItem.review="-";
-        whiskeyItem.type=WhiskeyItem.Type.GRAIN;
-        whiskeyItem.alcoholPercentage=0;
+        whiskeyItem.type = WhiskeyItem.Type.getByOrdinal(typeSpinner.getSelectedItemPosition());
         return whiskeyItem;
     }
 
-
     private View getContentView() {
-        View contentView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_new_whiskey_item, null);
+        View contentView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_modify_whiskey_item, null);
         nameEditText = contentView.findViewById(R.id.WhiskeyItemNameEditText);
         descriptionEditText = contentView.findViewById(R.id.WhiskeyItemDescriptionEditText);
         estimatedPriceEditText = contentView.findViewById(R.id.WhiskeyItemEstimatedPriceEditText);
@@ -90,7 +97,16 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
         categorySpinner.setAdapter(new ArrayAdapter<>(requireContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.category_items)));
+        typeSpinner = contentView.findViewById(R.id.WhiskeyItemTypeSpinner);
+        typeSpinner.setAdapter(new ArrayAdapter<>(requireContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                getResources().getStringArray(R.array.type_items)));
+        alcoholPercentageEditText = contentView.findViewById(R.id.WhiskeyItemAlcoholPercentageEditText);
+        reviewEditText = contentView.findViewById(R.id.WhiskeyItemReviewEditText);
 
         return contentView;
     }
+
 }
+
+

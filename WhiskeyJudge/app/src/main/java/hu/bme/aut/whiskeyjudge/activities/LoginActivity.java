@@ -13,15 +13,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*
-        try {                                                                                       //delay, TODO: remove this when u ready
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        //Theme(R.style.AppTheme);                                                                  //set back to main theme, but need only after the login page
-        */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 

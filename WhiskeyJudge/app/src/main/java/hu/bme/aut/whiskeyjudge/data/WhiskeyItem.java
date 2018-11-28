@@ -28,6 +28,27 @@ public class WhiskeyItem {
         }
     }
 
+    public enum Type {
+        MALT, GRAIN, BLENDED, BOURBON, TENNESSEE, POT;
+
+        @TypeConverter
+        public static Type getByOrdinal(int ordinal) {
+            Type ret = null;
+            for (Type cat : Type.values()) {
+                if (cat.ordinal() == ordinal) {
+                    ret = cat;
+                    break;
+                }
+            }
+            return ret;
+        }
+
+        @TypeConverter
+        public static int toInt(Type category) {
+            return category.ordinal();
+        }
+    }
+
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     public Long id;
@@ -44,6 +65,12 @@ public class WhiskeyItem {
     @ColumnInfo(name = "estimated_price")
     public int estimatedPrice;
 
-    //@ColumnInfo(name = "is_bought")
-    //public boolean isBought;
+    @ColumnInfo(name = "type")
+    public Type type;
+
+    @ColumnInfo(name = "alcohol_percentage")
+    public int alcoholPercentage;
+
+    @ColumnInfo(name = "review")
+    public String review;
 }
