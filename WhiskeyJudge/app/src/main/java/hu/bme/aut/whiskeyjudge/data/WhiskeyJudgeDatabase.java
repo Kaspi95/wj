@@ -6,7 +6,7 @@ import android.arch.persistence.room.TypeConverters;
 
 @Database(
         entities = {WhiskeyItem.class},
-        version = 4
+        version = 5
 )
 @TypeConverters(value = {WhiskeyItem.Category.class})
 public abstract class WhiskeyJudgeDatabase extends RoomDatabase {

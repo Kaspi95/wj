@@ -95,13 +95,6 @@
             android:gravity="right"
             android:text="Type: " />
 
-        <Spinner
-            android:id="@+id/WhiskeyItemTypeSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="-" />
-
     </LinearLayout>
     <!-- Price-->
     <LinearLayout

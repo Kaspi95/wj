@@ -75,7 +75,6 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
         }
         whiskeyItem.category = WhiskeyItem.Category.getByOrdinal(categorySpinner.getSelectedItemPosition());
         whiskeyItem.review="-";
-        whiskeyItem.type=WhiskeyItem.Type.GRAIN;
         whiskeyItem.alcoholPercentage=0;
         return whiskeyItem;
     }

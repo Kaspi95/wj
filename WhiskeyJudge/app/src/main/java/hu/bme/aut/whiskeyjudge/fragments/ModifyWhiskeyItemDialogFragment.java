@@ -84,7 +84,6 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
             whiskeyItem.alcoholPercentage = 0;
         }
         whiskeyItem.category = WhiskeyItem.Category.getByOrdinal(categorySpinner.getSelectedItemPosition());
-        whiskeyItem.type = WhiskeyItem.Type.getByOrdinal(typeSpinner.getSelectedItemPosition());
         return whiskeyItem;
     }
 
@@ -97,10 +96,6 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
         categorySpinner.setAdapter(new ArrayAdapter<>(requireContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.category_items)));
-        typeSpinner = contentView.findViewById(R.id.WhiskeyItemTypeSpinner);
-        typeSpinner.setAdapter(new ArrayAdapter<>(requireContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                getResources().getStringArray(R.array.type_items)));
         alcoholPercentageEditText = contentView.findViewById(R.id.WhiskeyItemAlcoholPercentageEditText);
         reviewEditText = contentView.findViewById(R.id.WhiskeyItemReviewEditText);
 
