@@ -25,15 +25,14 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
     private EditText descriptionEditText;
     private EditText estimatedPriceEditText;
     private Spinner categorySpinner;
-    private Spinner typeSpinner;
     private EditText alcoholPercentageEditText;
     private EditText reviewEditText;
 
-    public interface ModifyWhiskeyItemDialogListener {
-        void onItemChanged(WhiskeyItem newItem);
-    }
+    private ModifyWhiskeyItemDialogListener listener;
 
-    private ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener listener;
+    public interface ModifyWhiskeyItemDialogListener {
+        void onItemChanged(WhiskeyItem Item);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
                 .setView(getContentView())
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(DialogInterface dialogInterface, int i) {       //TODO: validaciot tovabbfejleszteni
                         if (isValid()) {
                             listener.onItemChanged(getWhiskeyItem());
                         }
@@ -84,10 +83,12 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
             whiskeyItem.alcoholPercentage = 0;
         }
         whiskeyItem.category = WhiskeyItem.Category.getByOrdinal(categorySpinner.getSelectedItemPosition());
+
+
         return whiskeyItem;
     }
 
-    private View getContentView() {
+    private View getContentView() {     //TODO: felulirni a behelyettesiteseket
         View contentView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_modify_whiskey_item, null);
         nameEditText = contentView.findViewById(R.id.WhiskeyItemNameEditText);
         descriptionEditText = contentView.findViewById(R.id.WhiskeyItemDescriptionEditText);

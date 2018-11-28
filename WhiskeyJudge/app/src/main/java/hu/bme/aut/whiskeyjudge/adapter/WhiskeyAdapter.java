@@ -3,6 +3,7 @@ package hu.bme.aut.whiskeyjudge.adapter;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class WhiskeyAdapter
     public interface WhiskeyItemClickListener {
         void onItemChanged(WhiskeyItem item);
         void onItemDeleted(WhiskeyItem item);
+        void requestItemChanging(WhiskeyItem item);
     }
 
     private @DrawableRes
@@ -90,11 +92,13 @@ public class WhiskeyAdapter
 
 
     public void deleteItem(WhiskeyItem item) {
+        int temp =items.indexOf(item);
         items.remove(item);
-        notifyItemRemoved(items.indexOf(item));
+        notifyItemRemoved(temp);
     }
 
     public void update(List<WhiskeyItem> whiskeyItems) {
+        //Log.d("ListActivity", item.name+" want to be change");
         items.clear();
         items.addAll(whiskeyItems);
         notifyDataSetChanged();
@@ -127,12 +131,13 @@ public class WhiskeyAdapter
                 @Override
                 public void onClick(View v) {
                     listener.onItemDeleted(item);
+                   
                 }
             });
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemChanged(item);
+                    listener.requestItemChanging(item);
                 }
             });
 

@@ -20,7 +20,9 @@ import hu.bme.aut.whiskeyjudge.fragments.ModifyWhiskeyItemDialogFragment;
 import hu.bme.aut.whiskeyjudge.fragments.NewWhiskeyItemDialogFragment;
 
 public class ListActivity extends AppCompatActivity
-                          implements NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener, WhiskeyAdapter.WhiskeyItemClickListener, ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener {
+                          implements    NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener,
+                                        WhiskeyAdapter.WhiskeyItemClickListener,
+                                        ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener {
 
     private RecyclerView recyclerView;
     private WhiskeyAdapter adapter;
@@ -51,6 +53,10 @@ public class ListActivity extends AppCompatActivity
         initRecyclerView();
     }
 
+    public  void requestItemChanging(WhiskeyItem item){
+        new ModifyWhiskeyItemDialogFragment().show(getSupportFragmentManager(), ModifyWhiskeyItemDialogFragment.TAG);
+    }
+
     private void initRecyclerView() {
         recyclerView = findViewById(R.id.MainRecyclerView);
         adapter = new WhiskeyAdapter(this);
@@ -77,17 +83,19 @@ public class ListActivity extends AppCompatActivity
     @Override
     public void onItemChanged(final WhiskeyItem item) {
         new AsyncTask<Void, Void, Boolean>() {
+            List<WhiskeyItem> items;
 
             @Override
             protected Boolean doInBackground(Void... voids) {
                 database.whiskeyItemDao().update(item);
+                items=database.whiskeyItemDao().getAll();
                 return true;
             }
 
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
-                adapter.update(database.whiskeyItemDao().getAll());
-                Log.d("ListActivity", "WhiskeyItem update was successful");
+               adapter.update(items);
+               Log.d("ListActivity", "WhiskeyItem update was successful");
             }
         }.execute();
     }
@@ -113,7 +121,6 @@ public class ListActivity extends AppCompatActivity
     @Override
     public void onItemDeleted(final WhiskeyItem item) {
         new AsyncTask<Void, Void, Boolean>() {
-
             @Override
             protected Boolean doInBackground(Void... voids) {
                 database.whiskeyItemDao().deleteItem(item);
