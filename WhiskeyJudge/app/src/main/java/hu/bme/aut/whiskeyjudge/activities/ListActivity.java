@@ -18,11 +18,13 @@ import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyJudgeDatabase;
 import hu.bme.aut.whiskeyjudge.fragments.ModifyWhiskeyItemDialogFragment;
 import hu.bme.aut.whiskeyjudge.fragments.NewWhiskeyItemDialogFragment;
+import hu.bme.aut.whiskeyjudge.fragments.RateWhiskeyItemDialogFragment;
 
 public class ListActivity extends AppCompatActivity
                           implements    NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener,
                                         WhiskeyAdapter.WhiskeyItemClickListener,
-                                        ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener {
+                                        ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener,
+                                        RateWhiskeyItemDialogFragment.RateWhiskeyItemDialogListener{
 
     private RecyclerView recyclerView;
     private WhiskeyAdapter adapter;
@@ -57,6 +59,11 @@ public class ListActivity extends AppCompatActivity
         new ModifyWhiskeyItemDialogFragment().show(getSupportFragmentManager(), ModifyWhiskeyItemDialogFragment.TAG);
     }
 
+    @Override
+    public void onWhiskeyItemRate(WhiskeyItem ratedItem) {
+        new RateWhiskeyItemDialogFragment().show(getSupportFragmentManager(), RateWhiskeyItemDialogFragment.TAG);
+    }
+
     private void initRecyclerView() {
         recyclerView = findViewById(R.id.MainRecyclerView);
         adapter = new WhiskeyAdapter(this);
@@ -82,6 +89,7 @@ public class ListActivity extends AppCompatActivity
 
     @Override
     public void onItemChanged(final WhiskeyItem item) {
+        Log.d("ListActivity", "WhiskeyItem "+item.name+" want to update");
         new AsyncTask<Void, Void, Boolean>() {
             List<WhiskeyItem> items;
 

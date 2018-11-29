@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Image-->
+    <!-- Image
     <ImageView
         android:id="@+id/WhiskeyItemIconImageView"
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         android:padding="8dp"
         app:srcCompat="@drawable/whiskey_jar"
         tools:src="@drawable/whiskey_jar" />
-
+    -->
 
     <!-- Name-->
     <LinearLayout
@@ -36,8 +36,7 @@
             android:id="@+id/WhiskeyItemNameEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="-" />
+            android:layout_weight="1" />
 
     </LinearLayout>
     <!-- Details-->
@@ -57,8 +56,7 @@
             android:id="@+id/WhiskeyItemDescriptionEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="-" />
+            android:layout_weight="1" />
 
     </LinearLayout>
     <!-- Category-->
@@ -78,11 +76,10 @@
             android:id="@+id/WhiskeyItemCategorySpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="-" />
+            android:layout_weight="1" />
 
     </LinearLayout>
-    <!-- Type-->
+    <!-- Type
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -96,6 +93,7 @@
             android:text="Type: " />
 
     </LinearLayout>
+    -->
     <!-- Price-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,8 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="-"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
     </LinearLayout>
     <!--alcohol%-->
     <LinearLayout
@@ -135,27 +132,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="-"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
     </LinearLayout>
-    <!-- Price-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2">
 
-        <TextView
-            android:layout_width="10sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="Review: " />
 
-        <EditText
-            android:id="@+id/WhiskeyItemReviewEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="-" />
-    </LinearLayout>
 </LinearLayout>

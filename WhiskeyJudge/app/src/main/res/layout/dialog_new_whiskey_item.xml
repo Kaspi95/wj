@@ -49,5 +49,27 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dip"
+        android:text="@string/alcohol_percentage" />
 
+    <EditText
+        android:id="@+id/WhiskeyItemAlcoholPercentageEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal" />
+<!--
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dip"
+        android:text="@string/review" />
+
+    <EditText
+        android:id="@+id/WhiskeyItemReviewEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+-->
 </LinearLayout>

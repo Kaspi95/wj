@@ -24,6 +24,8 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
     private EditText descriptionEditText;
     private EditText estimatedPriceEditText;
     private Spinner categorySpinner;
+    //private EditText reviewEditText;
+    private EditText alcoholPercentageEditText;
 
     public interface NewWhiskeyItemDialogListener {
         void onWhiskeyItemCreated(WhiskeyItem newItem);
@@ -51,7 +53,7 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (isValid()) {
+                        if (isValid()) {                            //TODO: secondary: write out warning msg, if u wanna validate
                             listener.onWhiskeyItemCreated(getWhiskeyItem());
                         }
                     }
@@ -60,9 +62,12 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
                 .create();
     }
 
+    /**
+     * Input validation on the new WhiskeyItem
+     */
     private boolean isValid() {
         return nameEditText.getText().length() > 0;
-    }
+    }      //TODO:secondary: improve validation
 
     private WhiskeyItem getWhiskeyItem() {
         WhiskeyItem whiskeyItem = new WhiskeyItem();
@@ -73,9 +78,14 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
         } catch (NumberFormatException e) {
             whiskeyItem.estimatedPrice = 0;
         }
+        try {
+            whiskeyItem.alcoholPercentage = Integer.parseInt(alcoholPercentageEditText.getText().toString());
+        } catch (NumberFormatException e) {
+            whiskeyItem.alcoholPercentage = 0;
+        }
         whiskeyItem.category = WhiskeyItem.Category.getByOrdinal(categorySpinner.getSelectedItemPosition());
-        whiskeyItem.review="-";
-        whiskeyItem.alcoholPercentage=0;
+        //whiskeyItem.review=descriptionEditText.getText().toString();
+
         return whiskeyItem;
     }
 
@@ -89,7 +99,8 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
         categorySpinner.setAdapter(new ArrayAdapter<>(requireContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.category_items)));
-
+        alcoholPercentageEditText = contentView.findViewById(R.id.WhiskeyItemAlcoholPercentageEditText);
+        //reviewEditText = contentView.findViewById(R.id.WhiskeyItemReviewEditText);
         return contentView;
     }
 }

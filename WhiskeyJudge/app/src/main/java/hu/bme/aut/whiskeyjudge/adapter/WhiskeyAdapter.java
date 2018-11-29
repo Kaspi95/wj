@@ -44,7 +44,6 @@ public class WhiskeyAdapter
     public void onBindViewHolder(@NonNull WhiskeyViewHolder holder, int position) {
         WhiskeyItem item = items.get(position);
         holder.nameTextView.setText(item.name);
-        holder.descriptionTextView.setText(item.description);
         holder.categoryTextView.setText(item.category.name());
         holder.priceTextView.setText(item.estimatedPrice + " Ft");
         holder.iconImageView.setImageResource(getImageResource(item.category));
@@ -58,9 +57,10 @@ public class WhiskeyAdapter
     }
 
     public interface WhiskeyItemClickListener {
-        void onItemChanged(WhiskeyItem item);
+        //void onItemChanged(WhiskeyItem item);
         void onItemDeleted(WhiskeyItem item);
         void requestItemChanging(WhiskeyItem item);
+        void onWhiskeyItemRate(WhiskeyItem ratedItem);
     }
 
     private @DrawableRes
@@ -98,7 +98,6 @@ public class WhiskeyAdapter
     }
 
     public void update(List<WhiskeyItem> whiskeyItems) {
-        //Log.d("ListActivity", item.name+" want to be change");
         items.clear();
         items.addAll(whiskeyItems);
         notifyDataSetChanged();
@@ -109,7 +108,6 @@ public class WhiskeyAdapter
 
         ImageView iconImageView;
         TextView nameTextView;
-        TextView descriptionTextView;
         TextView categoryTextView;
         TextView priceTextView;
         ImageButton removeButton;
@@ -119,9 +117,9 @@ public class WhiskeyAdapter
 
         WhiskeyViewHolder(View itemView) {
             super(itemView);
+
             iconImageView = itemView.findViewById(R.id.WhiskeyItemIconImageView);
             nameTextView = itemView.findViewById(R.id.WhiskeyItemNameTextView);
-            descriptionTextView = itemView.findViewById(R.id.WhiskeyItemDescriptionTextView);
             categoryTextView = itemView.findViewById(R.id.WhiskeyItemCategoryTextView);
             priceTextView = itemView.findViewById(R.id.WhiskeyItemPriceTextView);
             removeButton = itemView.findViewById(R.id.WhiskeyItemRemoveButton);
@@ -141,6 +139,12 @@ public class WhiskeyAdapter
                 }
             });
 
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    listener.onWhiskeyItemRate(item);
+                }
+            });
 
         }
     }

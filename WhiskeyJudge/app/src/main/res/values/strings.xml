@@ -21,6 +21,8 @@
     <string name="description">Description</string>
     <string name="category">Category</string>
     <string name="estimated_price">Estimated price</string>
+    <string name="alcohol_percentage">Alcohol percentage</string>
+    <string name="review">Review</string>
     <string-array name="category_items">
         <item>Scottish</item>
         <item>Irish</item>

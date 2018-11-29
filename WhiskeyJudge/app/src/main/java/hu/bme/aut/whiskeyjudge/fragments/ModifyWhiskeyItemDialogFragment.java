@@ -26,7 +26,7 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
     private EditText estimatedPriceEditText;
     private Spinner categorySpinner;
     private EditText alcoholPercentageEditText;
-    private EditText reviewEditText;
+    //private EditText reviewEditText;
 
     private ModifyWhiskeyItemDialogListener listener;
 
@@ -49,11 +49,11 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(requireContext())
-                .setTitle(R.string.new_whiskey_item)
-                .setView(getContentView())
+                .setTitle("Modify details")    //TODO:primary: atirni a kivalasztott nevere itt
+                .setView(getContentView())              //TODO:primary: felulirni a behelyettesiteseket itt
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {       //TODO: validaciot tovabbfejleszteni
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         if (isValid()) {
                             listener.onItemChanged(getWhiskeyItem());
                         }
@@ -65,13 +65,13 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
 
     private boolean isValid() {
         return nameEditText.getText().length() > 0;
-    }
+    }       //TODO:secondary: improve validation
 
     private WhiskeyItem getWhiskeyItem() {
         WhiskeyItem whiskeyItem = new WhiskeyItem();
         whiskeyItem.name = nameEditText.getText().toString();
         whiskeyItem.description = descriptionEditText.getText().toString();
-        whiskeyItem.review = reviewEditText.getText().toString();
+       // whiskeyItem.review = reviewEditText.getText().toString();
         try {
             whiskeyItem.estimatedPrice = Integer.parseInt(estimatedPriceEditText.getText().toString());
         } catch (NumberFormatException e) {
@@ -83,12 +83,10 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
             whiskeyItem.alcoholPercentage = 0;
         }
         whiskeyItem.category = WhiskeyItem.Category.getByOrdinal(categorySpinner.getSelectedItemPosition());
-
-
         return whiskeyItem;
     }
 
-    private View getContentView() {     //TODO: felulirni a behelyettesiteseket
+    private View getContentView() {
         View contentView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_modify_whiskey_item, null);
         nameEditText = contentView.findViewById(R.id.WhiskeyItemNameEditText);
         descriptionEditText = contentView.findViewById(R.id.WhiskeyItemDescriptionEditText);
@@ -98,7 +96,7 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.category_items)));
         alcoholPercentageEditText = contentView.findViewById(R.id.WhiskeyItemAlcoholPercentageEditText);
-        reviewEditText = contentView.findViewById(R.id.WhiskeyItemReviewEditText);
+        //reviewEditText = contentView.findViewById(R.id.WhiskeyItemReviewEditText);
 
         return contentView;
     }

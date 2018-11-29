@@ -32,12 +32,6 @@
             tools:text="Jack Daniels" />
 
         <TextView
-            android:id="@+id/WhiskeyItemDescriptionTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="My favorite bourbon" />
-
-        <TextView
             android:id="@+id/WhiskeyItemCategoryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
