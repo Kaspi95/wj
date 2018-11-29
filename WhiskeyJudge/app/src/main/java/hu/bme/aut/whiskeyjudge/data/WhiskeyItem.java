@@ -49,4 +49,7 @@ public class WhiskeyItem {
 
     @ColumnInfo(name = "review")
     public String review;
+
+    @ColumnInfo(name = "rating")
+    public float rating;
 }

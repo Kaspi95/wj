@@ -55,7 +55,7 @@ public class ListActivity extends AppCompatActivity
         initRecyclerView();
     }
 
-    public  void requestItemChanging(WhiskeyItem item){
+    public  void requestItemChanging(WhiskeyItem changingItem){
         new ModifyWhiskeyItemDialogFragment().show(getSupportFragmentManager(), ModifyWhiskeyItemDialogFragment.TAG);
     }
 

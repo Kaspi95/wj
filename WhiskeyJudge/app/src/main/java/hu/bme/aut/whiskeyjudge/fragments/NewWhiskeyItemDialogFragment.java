@@ -84,7 +84,7 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
             whiskeyItem.alcoholPercentage = 0;
         }
         whiskeyItem.category = WhiskeyItem.Category.getByOrdinal(categorySpinner.getSelectedItemPosition());
-        //whiskeyItem.review=descriptionEditText.getText().toString();
+        whiskeyItem.rating=0;
 
         return whiskeyItem;
     }
