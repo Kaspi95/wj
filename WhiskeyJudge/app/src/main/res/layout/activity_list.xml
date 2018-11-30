@@ -20,6 +20,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
+
     <include layout="@layout/content_list" />
 
     <android.support.design.widget.FloatingActionButton
@@ -31,3 +33,5 @@
         android:src="@drawable/ic_add_white_36dp" />
 
 </android.support.design.widget.CoordinatorLayout>
+
+

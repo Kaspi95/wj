@@ -1,6 +1,7 @@
 package hu.bme.aut.whiskeyjudge.fragments;
 
 import android.app.Dialog;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,12 +25,12 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
     private EditText descriptionEditText;
     private EditText estimatedPriceEditText;
     private Spinner categorySpinner;
-    //private EditText reviewEditText;
     private EditText alcoholPercentageEditText;
 
     public interface NewWhiskeyItemDialogListener {
         void onWhiskeyItemCreated(WhiskeyItem newItem);
     }
+
 
     private NewWhiskeyItemDialogListener listener;
 
@@ -42,6 +43,7 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
         } else {
             throw new RuntimeException("Activity must implement the NewWhiskeyItemDialogListener interface!");
         }
+
     }
 
     @NonNull
@@ -100,7 +102,6 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.category_items)));
         alcoholPercentageEditText = contentView.findViewById(R.id.WhiskeyItemAlcoholPercentageEditText);
-        //reviewEditText = contentView.findViewById(R.id.WhiskeyItemReviewEditText);
         return contentView;
     }
 }

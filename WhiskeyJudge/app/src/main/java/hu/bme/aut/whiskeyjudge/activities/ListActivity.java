@@ -4,6 +4,8 @@ import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,7 +30,20 @@ public class ListActivity extends AppCompatActivity
 
     private RecyclerView recyclerView;
     private WhiskeyAdapter adapter;
-    private WhiskeyJudgeDatabase database;
+    public WhiskeyJudgeDatabase database;
+/*    private static final ListActivity ourInstance=new ListActivity();
+    public static ListActivity getInstance(){return ourInstance;}
+
+    public ListActivity(){
+Log.d("constructor","lefutott");
+
+        database = Room.databaseBuilder(
+                getApplicationContext(),
+                WhiskeyJudgeDatabase.class,
+                "whiskey-list"
+        )       .fallbackToDestructiveMigration()
+                .build();
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +70,38 @@ public class ListActivity extends AppCompatActivity
         initRecyclerView();
     }
 
-    public  void requestItemChanging(WhiskeyItem changingItem){
-        new ModifyWhiskeyItemDialogFragment().show(getSupportFragmentManager(), ModifyWhiskeyItemDialogFragment.TAG);
+ /*   public WhiskeyItem getItemById(final Long id){
+
+        new AsyncTask<Void, Void, WhiskeyItem>() {
+            @Override
+            protected WhiskeyItem doInBackground(Void... voids) {
+                return database.whiskeyItemDao().getOne(id);
+            }
+            @Override
+            protected void onPostExecute(WhiskeyItem whiskeyItems) {
+
+            }
+
+        }.execute();
+    }
+
+*/
+    public  void requestItemChanging(final WhiskeyItem changingItem){
+
+
+        ModifyWhiskeyItemDialogFragment frag =ModifyWhiskeyItemDialogFragment.newInstance(changingItem);
+        frag.show(getSupportFragmentManager(), ModifyWhiskeyItemDialogFragment.TAG);
+
+
     }
 
     @Override
     public void onWhiskeyItemRate(WhiskeyItem ratedItem) {
-        new RateWhiskeyItemDialogFragment().show(getSupportFragmentManager(), RateWhiskeyItemDialogFragment.TAG);
+        DialogFragment newFragment = new RateWhiskeyItemDialogFragment();
+        //newFragment.setter(ratedItem);
+        newFragment.show(getSupportFragmentManager(), RateWhiskeyItemDialogFragment.TAG);
+
+
     }
 
     private void initRecyclerView() {

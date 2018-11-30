@@ -28,10 +28,10 @@
             <EditText
                 android:id="@+id/WhiskeyItemRateEditText"
                 android:layout_width="wrap_content"
+                android:minWidth="1sp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:inputType="number"
-                android:text="0" />
+                android:inputType="number" />
         </LinearLayout>
 
         <RatingBar
