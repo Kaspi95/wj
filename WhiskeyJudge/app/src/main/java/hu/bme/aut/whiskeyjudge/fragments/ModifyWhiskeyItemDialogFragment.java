@@ -24,56 +24,23 @@ import java.util.List;
 import hu.bme.aut.whiskeyjudge.R;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 
-public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
-
+public class ModifyWhiskeyItemDialogFragment extends DialogFragment {
     public static final String TAG = "ModifyWhiskeyItemDialogFragment";
-/*
-    public ModifyWhiskeyItemDialogFragment(){
-    }
-    public ModifyWhiskeyItemDialogFragment(WhiskeyItem changingItem){
-        this.changingItem=changingItem;
-    }
-    */
+
     private WhiskeyItem changingItem;
     private EditText nameEditText;
-    //private String  name;
     private EditText descriptionEditText;
-   // private String description;
     private EditText estimatedPriceEditText;
-   // private int price;
     private Spinner categorySpinner;
     private EditText alcoholPercentageEditText;
     private Long id;
-    //private int alcohol;
 
-/*
-    public void setter(WhiskeyItem changingItem){
-        nameEditText.setText(changingItem.name);
-        if(!changingItem.description.isEmpty())
-            nameEditText.setText(changingItem.description);
-        estimatedPriceEditText.setText(changingItem.estimatedPrice);
-       categorySpinner.setSelection(changingItem.category.toInt(changingItem.category));
-        alcoholPercentageEditText.setText(changingItem.alcoholPercentage);
-    }
-  */
 
-    public static ModifyWhiskeyItemDialogFragment newInstance(WhiskeyItem changeItem){
-        ModifyWhiskeyItemDialogFragment frag =new ModifyWhiskeyItemDialogFragment();
-        Bundle temp =new Bundle();
-        /*if(!changingItem.name.isEmpty())
-            temp.putString("name",changingItem.name);
-        else
-            temp.putString("name","");
+    public static ModifyWhiskeyItemDialogFragment newInstance(WhiskeyItem changeItem) {
+        ModifyWhiskeyItemDialogFragment frag = new ModifyWhiskeyItemDialogFragment();
+        Bundle temp = new Bundle();
 
-        if(!changingItem.name.isEmpty())
-            temp.putString("description",changingItem.description);
-        else
-            temp.putString("description","");
-
-        temp.putInt("estimatedPrice",changingItem.estimatedPrice);
-        temp.putInt("alcoholPercentage",changingItem.alcoholPercentage);
-        */
-        temp.putLong("id",changeItem.id);
+        temp.putLong("id", changeItem.id);
         frag.setArguments(temp);
         return frag;
     }
@@ -88,30 +55,26 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        id=getArguments().getLong("id",0);
+        id = getArguments().getLong("id", 0);
         new AsyncTask<Void, Void, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... voids) {
-                Log.d("Thread"," we got the id"+id);
-                changingItem = ((hu.bme.aut.whiskeyjudge.activities.ListActivity)getActivity()).database.whiskeyItemDao().getOne(id);
-                Log.d("Thread"," we got the item"+changingItem.name);
-            return true;
+                changingItem = ((hu.bme.aut.whiskeyjudge.activities.ListActivity) getActivity()).database.whiskeyItemDao().getOne(id);
+                return true;
             }
+
             @Override
             protected void onPostExecute(Boolean bool) {
-                Log.d("onCreate"," We go the item");
+
+                //Log.d("onCreate"," We go the item");
             }
 
         }.execute();
-        try {
-            Thread.sleep(1000);
+        try {//be kell varni az aszinkron szalat kulonben meghal az oncreatedialog
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // alcohol=getArguments().getInt("alcoholPercentage",0);
-       // price=getArguments().getInt("estimatedPrice",0);
-       // name=getArguments().getString("name","");
-       // description=getArguments().getString("description","");
 
         FragmentActivity activity = getActivity();
         if (activity instanceof ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener) {
@@ -125,7 +88,7 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(requireContext())
-                .setTitle("Modify details")
+                .setTitle("Modify " + changingItem.name + "'s details")
                 .setView(getContentView())
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -172,20 +135,19 @@ public class ModifyWhiskeyItemDialogFragment  extends DialogFragment {
 
     private View getContentView() {
         View contentView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_modify_whiskey_item, null);
+
         nameEditText = contentView.findViewById(R.id.WhiskeyItemNameEditText);
-            nameEditText.setText(changingItem.name);
+        nameEditText.setText(changingItem.name);
         descriptionEditText = contentView.findViewById(R.id.WhiskeyItemDescriptionEditText);
-        if(!changingItem.description.isEmpty())
+        if (!changingItem.description.isEmpty())
             descriptionEditText.setText(changingItem.description);
         estimatedPriceEditText = contentView.findViewById(R.id.WhiskeyItemEstimatedPriceEditText);
-
         estimatedPriceEditText.setText(Integer.toString(changingItem.estimatedPrice));
         categorySpinner = contentView.findViewById(R.id.WhiskeyItemCategorySpinner);
         categorySpinner.setAdapter(new ArrayAdapter<>(requireContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.category_items)));
         categorySpinner.setSelection(changingItem.category.toInt(changingItem.category));
-
         alcoholPercentageEditText = contentView.findViewById(R.id.WhiskeyItemAlcoholPercentageEditText);
         alcoholPercentageEditText.setText(Integer.toString(changingItem.alcoholPercentage));                //TODO a tobbinel is tostring kell!!!!!!
         return contentView;

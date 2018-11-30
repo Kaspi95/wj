@@ -13,33 +13,11 @@
             android:layout_width="match_parent"
             android:layout_height="40dp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_marginLeft="160dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="Quality rating: " />
-
-            <EditText
-                android:id="@+id/WhiskeyItemRateEditText"
-                android:layout_width="wrap_content"
-                android:minWidth="1sp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:inputType="number" />
-        </LinearLayout>
-
         <RatingBar
             android:id="@+id/WhiskeyItemQualityRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:isIndicator="true"
             android:stepSize="0.5"
             android:numStars="5" />
 

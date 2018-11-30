@@ -79,21 +79,7 @@
             android:layout_weight="1" />
 
     </LinearLayout>
-    <!-- Type
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2">
 
-        <TextView
-            android:layout_width="10sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="Type: " />
-
-    </LinearLayout>
-    -->
     <!-- Price-->
     <LinearLayout
         android:layout_width="match_parent"

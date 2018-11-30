@@ -55,7 +55,7 @@ public class NewWhiskeyItemDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (isValid()) {                            //TODO: secondary: write out warning msg, if u wanna validate
+                        if (isValid()) {                            //TODO: secondary: write out warning msg, not just close
                             listener.onWhiskeyItemCreated(getWhiskeyItem());
                         }
                     }
