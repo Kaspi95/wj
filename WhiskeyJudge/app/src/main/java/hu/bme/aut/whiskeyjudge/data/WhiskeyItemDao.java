@@ -14,7 +14,7 @@ public interface WhiskeyItemDao {
     List<WhiskeyItem> getAll();
 
     @Query("SELECT * FROM whiskeyitem WHERE id= :itemId")
-            WhiskeyItem getOne(Long itemId);
+    WhiskeyItem getOne(Long itemId);
 
     @Insert
     long insert(WhiskeyItem whiskeyItems);

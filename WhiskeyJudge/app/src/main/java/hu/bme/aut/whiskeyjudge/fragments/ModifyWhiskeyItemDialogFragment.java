@@ -149,7 +149,7 @@ public class ModifyWhiskeyItemDialogFragment extends DialogFragment {
                 getResources().getStringArray(R.array.category_items)));
         categorySpinner.setSelection(changingItem.category.toInt(changingItem.category));
         alcoholPercentageEditText = contentView.findViewById(R.id.WhiskeyItemAlcoholPercentageEditText);
-        alcoholPercentageEditText.setText(Integer.toString(changingItem.alcoholPercentage));                //TODO a tobbinel is tostring kell!!!!!!
+        alcoholPercentageEditText.setText(Integer.toString(changingItem.alcoholPercentage));
         return contentView;
     }
 

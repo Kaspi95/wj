@@ -59,7 +59,9 @@ public class WhiskeyAdapter
     public interface WhiskeyItemClickListener {
         //void onItemChanged(WhiskeyItem item);
         void onItemDeleted(WhiskeyItem item);
+
         void requestItemChanging(WhiskeyItem item);
+
         void onWhiskeyItemRate(WhiskeyItem ratedItem);
     }
 
@@ -92,7 +94,7 @@ public class WhiskeyAdapter
 
 
     public void deleteItem(WhiskeyItem item) {
-        int temp =items.indexOf(item);
+        int temp = items.indexOf(item);
         items.remove(item);
         notifyItemRemoved(temp);
     }
@@ -129,7 +131,7 @@ public class WhiskeyAdapter
                 @Override
                 public void onClick(View v) {
                     listener.onItemDeleted(item);
-                   
+
                 }
             });
             editButton.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +141,7 @@ public class WhiskeyAdapter
                 }
             });
 
-            itemView.setOnClickListener(new View.OnClickListener(){
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onWhiskeyItemRate(item);

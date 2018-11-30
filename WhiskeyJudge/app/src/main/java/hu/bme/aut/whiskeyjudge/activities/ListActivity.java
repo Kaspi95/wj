@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -72,6 +73,7 @@ public class ListActivity extends AppCompatActivity
            }.execute();
        }
    */
+    @Override
     public void requestItemChanging(final WhiskeyItem changingItem) {
         ModifyWhiskeyItemDialogFragment frag = ModifyWhiskeyItemDialogFragment.newInstance(changingItem);
         frag.show(getSupportFragmentManager(), ModifyWhiskeyItemDialogFragment.TAG);
@@ -108,7 +110,6 @@ public class ListActivity extends AppCompatActivity
 
     @Override
     public void onItemChanged(final WhiskeyItem item) {
-        Log.d("ListActivity", "WhiskeyItem " + item.name + " want to update");
         new AsyncTask<Void, Void, Boolean>() {
             List<WhiskeyItem> items;
 
@@ -122,7 +123,8 @@ public class ListActivity extends AppCompatActivity
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
                 adapter.update(items);
-                Log.d("ListActivity", "WhiskeyItem update was successful");
+                Snackbar.make(findViewById(android.R.id.content), item.name + " updated", Snackbar.LENGTH_LONG).show();
+                Log.d("ListActivity", "WhiskeyItem: " + item.name + " update was successful");
             }
         }.execute();
     }
@@ -140,7 +142,8 @@ public class ListActivity extends AppCompatActivity
             @Override
             protected void onPostExecute(WhiskeyItem whiskeyItem) {
                 adapter.addItem(whiskeyItem);
-                Log.d("ListActivity", "WhiskeyItem creation was successful");
+                Snackbar.make(findViewById(android.R.id.content), newItem.name + " created", Snackbar.LENGTH_LONG).show();
+                Log.d("ListActivity", "WhiskeyItem: " + newItem.name + " creation was successful");
             }
         }.execute();
     }
@@ -157,7 +160,8 @@ public class ListActivity extends AppCompatActivity
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
                 adapter.deleteItem(item);
-                Log.d("ListActivity", "WhiskeyItem delete was successful");
+                Snackbar.make(findViewById(android.R.id.content), item.name + " deleted", Snackbar.LENGTH_LONG).show();
+                Log.d("ListActivity", "WhiskeyItem: " + item.name + " delete was successful");
             }
         }.execute();
     }

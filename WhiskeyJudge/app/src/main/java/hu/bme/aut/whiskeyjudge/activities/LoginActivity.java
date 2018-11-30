@@ -3,6 +3,7 @@ package hu.bme.aut.whiskeyjudge.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                     etPassword.setError("Please enter your password");
                     return;
                 }
+                Log.d("LoginActivity", etEmailAddress.getText().toString() + " has logged in successfully");
 
                 Intent intent = new Intent(LoginActivity.this, ListActivity.class);   //Login button navigate to the mainActivity
                 startActivity(intent);
