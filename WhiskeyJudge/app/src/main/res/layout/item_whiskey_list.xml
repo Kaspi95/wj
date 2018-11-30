@@ -10,6 +10,7 @@
     android:paddingBottom="8dp">
 
 
+
     <ImageView
         android:id="@+id/WhiskeyItemIconImageView"
         android:layout_width="64dp"
@@ -32,12 +33,6 @@
             tools:text="Jack Daniels" />
 
         <TextView
-            android:id="@+id/WhiskeyItemDescriptionTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="My favorite bourbon" />
-
-        <TextView
             android:id="@+id/WhiskeyItemCategoryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,6 +44,15 @@
             android:layout_height="wrap_content"
             tools:text="8000 Ft" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/WhiskeyItemModifyButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_pencil_grey600_48dp" />
 
     <ImageButton
         android:id="@+id/WhiskeyItemRemoveButton"

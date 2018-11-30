@@ -3,6 +3,7 @@ package hu.bme.aut.whiskeyjudge.adapter;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,6 @@ public class WhiskeyAdapter
     public void onBindViewHolder(@NonNull WhiskeyViewHolder holder, int position) {
         WhiskeyItem item = items.get(position);
         holder.nameTextView.setText(item.name);
-        holder.descriptionTextView.setText(item.description);
         holder.categoryTextView.setText(item.category.name());
         holder.priceTextView.setText(item.estimatedPrice + " Ft");
         holder.iconImageView.setImageResource(getImageResource(item.category));
@@ -57,8 +57,10 @@ public class WhiskeyAdapter
     }
 
     public interface WhiskeyItemClickListener {
-        void onItemChanged(WhiskeyItem item);           //TODO: valtoztatas ranoymasra
+        //void onItemChanged(WhiskeyItem item);
         void onItemDeleted(WhiskeyItem item);
+        void requestItemChanging(WhiskeyItem item);
+        void onWhiskeyItemRate(WhiskeyItem ratedItem);
     }
 
     private @DrawableRes
@@ -90,8 +92,9 @@ public class WhiskeyAdapter
 
 
     public void deleteItem(WhiskeyItem item) {
+        int temp =items.indexOf(item);
         items.remove(item);
-        notifyItemRemoved(items.indexOf(item));
+        notifyItemRemoved(temp);
     }
 
     public void update(List<WhiskeyItem> whiskeyItems) {
@@ -105,28 +108,44 @@ public class WhiskeyAdapter
 
         ImageView iconImageView;
         TextView nameTextView;
-        TextView descriptionTextView;
         TextView categoryTextView;
         TextView priceTextView;
         ImageButton removeButton;
+        ImageButton editButton;
 
         WhiskeyItem item;
 
         WhiskeyViewHolder(View itemView) {
             super(itemView);
+
             iconImageView = itemView.findViewById(R.id.WhiskeyItemIconImageView);
             nameTextView = itemView.findViewById(R.id.WhiskeyItemNameTextView);
-            descriptionTextView = itemView.findViewById(R.id.WhiskeyItemDescriptionTextView);
             categoryTextView = itemView.findViewById(R.id.WhiskeyItemCategoryTextView);
             priceTextView = itemView.findViewById(R.id.WhiskeyItemPriceTextView);
             removeButton = itemView.findViewById(R.id.WhiskeyItemRemoveButton);
+            editButton = itemView.findViewById(R.id.WhiskeyItemModifyButton);
 
             removeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onItemDeleted(item);
+                   
                 }
             });
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.requestItemChanging(item);
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    listener.onWhiskeyItemRate(item);
+                }
+            });
+
         }
     }
 }

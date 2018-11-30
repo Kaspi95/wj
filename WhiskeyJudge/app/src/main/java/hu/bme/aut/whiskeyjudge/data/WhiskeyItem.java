@@ -44,6 +44,12 @@ public class WhiskeyItem {
     @ColumnInfo(name = "estimated_price")
     public int estimatedPrice;
 
-    //@ColumnInfo(name = "is_bought")
-    //public boolean isBought;
+    @ColumnInfo(name = "alcohol_percentage")
+    public int alcoholPercentage;
+
+    @ColumnInfo(name = "review")
+    public String review;
+
+    @ColumnInfo(name = "rating")
+    public float rating;
 }

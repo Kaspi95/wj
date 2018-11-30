@@ -4,6 +4,8 @@ import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,14 +19,19 @@ import hu.bme.aut.whiskeyjudge.R;
 import hu.bme.aut.whiskeyjudge.adapter.WhiskeyAdapter;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyItem;
 import hu.bme.aut.whiskeyjudge.data.WhiskeyJudgeDatabase;
+import hu.bme.aut.whiskeyjudge.fragments.ModifyWhiskeyItemDialogFragment;
 import hu.bme.aut.whiskeyjudge.fragments.NewWhiskeyItemDialogFragment;
+import hu.bme.aut.whiskeyjudge.fragments.RateWhiskeyItemDialogFragment;
 
 public class ListActivity extends AppCompatActivity
-                          implements NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener, WhiskeyAdapter.WhiskeyItemClickListener {
+        implements NewWhiskeyItemDialogFragment.NewWhiskeyItemDialogListener,
+        WhiskeyAdapter.WhiskeyItemClickListener,
+        ModifyWhiskeyItemDialogFragment.ModifyWhiskeyItemDialogListener,
+        RateWhiskeyItemDialogFragment.RateWhiskeyItemDialogListener {
 
     private RecyclerView recyclerView;
     private WhiskeyAdapter adapter;
-    private WhiskeyJudgeDatabase database;
+    public WhiskeyJudgeDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +52,35 @@ public class ListActivity extends AppCompatActivity
                 getApplicationContext(),
                 WhiskeyJudgeDatabase.class,
                 "whiskey-list"
-        ).build();
+        ).fallbackToDestructiveMigration()
+                .build();
 
         initRecyclerView();
+    }
+
+    /*   public WhiskeyItem getItemById(final Long id){
+           new AsyncTask<Void, Void, WhiskeyItem>() {
+               @Override
+               protected WhiskeyItem doInBackground(Void... voids) {
+                   return database.whiskeyItemDao().getOne(id);
+               }
+               @Override
+               protected void onPostExecute(WhiskeyItem whiskeyItem) {
+               fragment = (MyFragment) getSupportFragmentManager().findFragmentByTag("FragmentTag");
+               fragment.setItem(whiskeyItem);
+               }
+           }.execute();
+       }
+   */
+    public void requestItemChanging(final WhiskeyItem changingItem) {
+        ModifyWhiskeyItemDialogFragment frag = ModifyWhiskeyItemDialogFragment.newInstance(changingItem);
+        frag.show(getSupportFragmentManager(), ModifyWhiskeyItemDialogFragment.TAG);
+    }
+
+    @Override
+    public void onWhiskeyItemRate(WhiskeyItem ratedItem) {
+        RateWhiskeyItemDialogFragment newFragment = RateWhiskeyItemDialogFragment.newInstance(ratedItem);
+        newFragment.show(getSupportFragmentManager(), RateWhiskeyItemDialogFragment.TAG);
     }
 
     private void initRecyclerView() {
@@ -75,16 +108,20 @@ public class ListActivity extends AppCompatActivity
 
     @Override
     public void onItemChanged(final WhiskeyItem item) {
+        Log.d("ListActivity", "WhiskeyItem " + item.name + " want to update");
         new AsyncTask<Void, Void, Boolean>() {
+            List<WhiskeyItem> items;
 
             @Override
             protected Boolean doInBackground(Void... voids) {
                 database.whiskeyItemDao().update(item);
+                items = database.whiskeyItemDao().getAll();
                 return true;
             }
 
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
+                adapter.update(items);
                 Log.d("ListActivity", "WhiskeyItem update was successful");
             }
         }.execute();
@@ -111,7 +148,6 @@ public class ListActivity extends AppCompatActivity
     @Override
     public void onItemDeleted(final WhiskeyItem item) {
         new AsyncTask<Void, Void, Boolean>() {
-
             @Override
             protected Boolean doInBackground(Void... voids) {
                 database.whiskeyItemDao().deleteItem(item);
